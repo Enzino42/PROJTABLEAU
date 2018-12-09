@@ -2,7 +2,7 @@
 """
 Created on Fri Nov 23 17:11:23 2018
 
-@author: Enzin
+@author: Enzino,Yanis,Marion.
 """
 
 import requests, time
@@ -16,7 +16,7 @@ urlmeteo='http://www.prevision-meteo.ch/services/json/savigny-sur-orge'
 urlbus385='https://api-lab-trone-stif.opendata.stif.info/service/tr-vianavigo/departures?line_id=100100385%3A385&stop_point_id=StopPoint%3A59%3A6195778'
 
 #liste des condition météo ---------------------------------------------------------
-Ensoleillé = ['Ensoleillé', 
+Ensoleille = ['Ensoleillé', 
               'Nuit bien dégagée', 
               'Eclaircies', 
               'Faibles passages nuageux',
@@ -62,9 +62,9 @@ Neige = ['Averses de neige faible',
 
 #nuit ou non ?--------------------------------------------------------------------------
 
-def jour(temp_réel,sunrise,sunset):
-    heuretemps = int(temp_réel[:2])
-    minutetemps = int(temp_réel[3:])
+def jour(temp_reel,sunrise,sunset):
+    heuretemps = int(temp_reel[:2])
+    minutetemps = int(temp_reel[3:])
     heuredébut = int(sunrise[:2])
     minutedébut = int(sunrise[3:])
     heurefin = int(sunset[:2])
@@ -89,7 +89,7 @@ def choixtemps(condi):
         print ('Nuageux')
     if condi in Pluvieux :
         print('Pluvieux')
-    if condi in Ensoleillé :
+    if condi in Ensoleille :
         print('Ensoleillé')
     if condi in Neige :
         print('Neige')  
@@ -106,16 +106,16 @@ def takedata():
 #-----------------------------------------------------------------------------------------------
     sunrise = datameteo['city_info']['sunrise']
     sunset = datameteo['city_info']['sunset']
-    temp_réel = time.strftime('%H:%M')
+    temp_reel = time.strftime('%H:%M')
 #condition météorologique
 
     condi = datameteo['current_condition']['condition']
 
 
-    tempé =  datameteo['current_condition']['tmp']
+    temp =  datameteo['current_condition']['tmp']
     
    
-    return condi,sunrise,sunset,temp_réel,datameteo,Databrut,tempé,databus
+    return condi,sunrise,sunset,temp_reel,datameteo,Databrut,temp,databus
 
 def afficherjour(etatjour):
     
@@ -157,19 +157,17 @@ def horairebus(databus):
             
 
 def main():
-    
-#while méteo
-    
+   
     while True:
         
-        condi,sunrise,sunset,temp_réel,data,Databrut,tempé,databus = takedata()
+        condi,sunrise,sunset,temp_reel,data,Databrut,temp,databus = takedata()
         print("sunrise :",sunrise)   
         print(time.strftime('%H:%M'))
         print("sunset :",sunset)
-        etatjour=jour(temp_réel, sunrise, sunset)
+        etatjour=jour(temp_reel, sunrise, sunset)
         afficherjour(etatjour)       
         choixtemps(condi)     
-        print(tempé,"°C")  
+        print(temp,"°C")  
         print(' ')
         horairebus(databus)
         print('----------------------------')
