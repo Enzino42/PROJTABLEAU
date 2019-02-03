@@ -55,6 +55,7 @@ Pluvieux = ['Stratus',
 Neige = ['Averses de neige faible',
          'Nuit avec averses de neige faible',
          'Neige faible',
+         'Neige modérée',
          'Neige forte',
          ]
 
@@ -99,7 +100,7 @@ def takedata():
     Databrut = requests.get(urlmeteo) 
     datameteo = Databrut.json()
     jar = requests.cookies.RequestsCookieJar()
-    jar.set('sessionid','eqj7aszlxj9ucsb55dzcedpyxugd7wod',domain='api-lab-trone-stif.opendata.stif.info',path='/')
+    jar.set('sessionid','m66syhel7wsa2kdw1u5fdu6z45gz3mgb',domain='api-lab-trone-stif.opendata.stif.info',path='/')
     busdatabrut = requests.get(urlbus385, cookies=jar)
     databus = busdatabrut.json()
 
@@ -125,11 +126,12 @@ def afficherjour(etatjour):
         print("nuit")
         
 def horairebus(databus):
+    code = ' '
     direction = databus[0]['lineDirection']
     if direction == 'Suivant a + De' :
         print('--')
     
-    elif direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' :
+    elif direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' or direction == 'Savigny-Sur-Orge RER' :
         code = databus[0]['code']
         if code == 'duration' :
             dirgaresav = databus[0]['time']
@@ -138,7 +140,7 @@ def horairebus(databus):
             print("0 minute")
     else :
         direction = databus[1]['lineDirection']
-        if direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' :
+        if direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' or direction == 'Savigny-Sur-Orge RER' :
             code = databus[1]['code']
             if code == 'duration' :
                 dirgaresav = databus[1]['time']
@@ -147,7 +149,7 @@ def horairebus(databus):
                 print("0 minute")
         else:
             direction = databus[2]['lineDirection']
-            if direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' :
+            if direction == 'Savigny Toulouse-Lautrec' or direction == 'Epinay-Sur-Orge RER' or direction == 'Savigny-Sur-Orge RER' :
                 code = databus[2]['code']
             if code == 'duration' :
                 dirgaresav = databus[2]['time']
