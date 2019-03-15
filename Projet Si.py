@@ -7,7 +7,7 @@ Created on Fri Nov 23 17:11:23 2018
 
 import requests, time
 #user='enzo.vieira@reseau.eseo.fr'
-#pas='MDPProjetSi2018'        surement a utiliser plus tard pour refresh les cookie (possibilité d'automatiser)
+        surement a utiliser plus tard pour refresh les cookie (possibilité d'automatiser)
 # avec from requests.auth import HTTPDigestAuth
 #from requests.auth import HTTPDigestAuth
 
